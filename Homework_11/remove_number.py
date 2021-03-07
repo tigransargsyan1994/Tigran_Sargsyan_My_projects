@@ -31,5 +31,5 @@ except ValueError:
 else:
     result = remove_number(lst)
     print(result)
-
+#
 

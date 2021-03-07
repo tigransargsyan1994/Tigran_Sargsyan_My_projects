@@ -12,3 +12,4 @@ lst = [int(x) for x in input().split()]
 result = sum(lst)
 
 print(result)
+#

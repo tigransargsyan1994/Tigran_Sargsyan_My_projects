@@ -1,0 +1,2 @@
+Name,Year,Score,Presence
+Anna Ghazaryan,2019,100,80

@@ -28,11 +28,11 @@ class Tree(object):
         elif (self.left == None) and (self.right == None):
             return 1
 
-    def count_elements(node):
-        if node == None:
-            return 0
-
-        return count_elements(node.left) + count_elements(node.right) + 1
+    # def count_elements(node):
+    #     if node == None:
+    #         return 0
+    #
+    #     return count_elements(node.left) + count_elements(node.right) + 1
 
 
 root = Tree('root')

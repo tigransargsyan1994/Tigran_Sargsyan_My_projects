@@ -50,12 +50,34 @@ def import111(root, left, right, left_left, left_right, right_left, right_right)
         def print_tree_1(self, traversal_type):
             if traversal_type == 'preorder':
                 return self.preorder_print(tree.root, '')
+            elif traversal_type == 'inorder':
+                return self.inorder_print(tree.root, '')
+            elif traversal_type == 'postorder':
+                return self.postorder_print(tree.root, '')
+            else:
+                print('Traversal type' + str(traversal_type) + 'is not supported')
 
         def preorder_print(self, start, traversal):
             if start:
                 traversal += (str(start.value) + ' - ')
                 traversal = self.preorder_print(start.left, traversal)
                 traversal = self.preorder_print(start.right, traversal)
+            return traversal
+
+        def inorder_print(self, start, traversal):
+            if start:
+                traversal = self.inorder_print(start.left, traversal)
+                traversal += (str(start.value) + ' - ')
+                traversal = self.inorder_print(start.right, traversal)
+
+            return traversal
+
+        def postorder_print(self, start, traversal):
+            if start:
+                traversal = self.postorder_print(start.left, traversal)
+                traversal = self.postorder_print(start.right, traversal)
+                traversal += (str(start.value) + ' - ')
+
             return traversal
 
     tree = BinaryTree(num1)
@@ -69,11 +91,20 @@ def import111(root, left, right, left_left, left_right, right_left, right_right)
     tree.root.right.left = Node(num6)
     tree.root.right.right = Node(num7)
 
-    lblresult.delete(0, END)
-    lblresult.insert(0, tree.print_tree_1('preorder'))
+    if btresult1:
+        lblresult.delete(0, END)
+        lblresult.insert(0, tree.print_tree_1('preorder'))
+
+    elif btresult2:
+        lblresult.delete(0, END)
+        lblresult.insert(0, tree.print_tree_1('inorder'))
+
+    else:
+        lblresult.delete(0, END)
+        lblresult.insert(0, tree.print_tree_1('postorder'))
 
 
-label_final = Label(window, text="Result: ").grid(row=10, column=8, sticky=W)
+label_final = Label(window, text="Result: ").grid(row=10, column=8, sticky=N)
 
 lblresult = Entry(window, justify=RIGHT, width=50)
 lblresult.grid(row=15, column=8, sticky=E)
@@ -87,5 +118,25 @@ btresult1 = Button(window, text="Pre_Order", command=lambda: import111(root.get(
                                                                        right_right.get()))
 
 btresult1.grid(row=19, column=8, sticky=E)
+
+btresult2 = Button(window, text="In_Order", command=lambda: import111(root.get(),
+                                                                      left.get(),
+                                                                      right.get(),
+                                                                      left_left.get(),
+                                                                      left_right.get(),
+                                                                      right_left.get(),
+                                                                      right_right.get()))
+
+btresult2.grid(row=19, column=8, sticky=N)
+
+btresult3 = Button(window, text="Post_Order", command=lambda: import111(root.get(),
+                                                                        left.get(),
+                                                                        right.get(),
+                                                                        left_left.get(),
+                                                                        left_right.get(),
+                                                                        right_left.get(),
+                                                                        right_right.get()))
+
+btresult3.grid(row=19, column=8, sticky=W)
 
 window.mainloop()

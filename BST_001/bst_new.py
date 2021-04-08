@@ -42,24 +42,20 @@ class Application(tk.Frame):
                                               command=lambda: [self.insert_element(), self.add_to_list()])
         self.submit_button_insert.grid(row=0, column=2, sticky='e')
 
-
         self.submit_button_preorder = tk.Button(self.root,
                                                 text="Preorder",
                                                 command=self.make_preordered)
         self.submit_button_preorder.grid(row=1, column=2, sticky='e')
-
 
         self.submit_button_inorder = tk.Button(self.root,
                                                text="Inorder",
                                                command=self.make_inordered)
         self.submit_button_inorder.grid(row=2, column=2, sticky='e')
 
-
         self.submit_button_postorder = tk.Button(self.root,
                                                  text="Postorder",
                                                  command=self.make_postordered)
         self.submit_button_postorder.grid(row=3, column=2, sticky='e')
-
 
         # Set the treeview
         self.tree = ttk.Treeview(self.root, columns=('Elements'))
@@ -81,18 +77,22 @@ class Application(tk.Frame):
     def add_to_list(self):
         '''
         Adding all the elements of the entry to the list
-
-
         '''
-        self.list1.append(int(self.element_entry.get()))
+        try:
+            self.list1.append(int(self.element_entry.get()))
+        except ValueError:
+            pass
 
     def insert_element(self):
         '''
         Printing all the elements in entry in Treeview
-
         '''
-        self.treeview.insert('', 'end', iid=self.iid, text="Item_" + str(self.id),
-                             values=(self.element_entry.get()))
+
+        try:
+            self.treeview.insert('', 'end', iid=self.iid, text="Item_" + str(self.id),
+                                 values=(int(self.element_entry.get())))
+        except ValueError:
+            pass
 
         self.iid = self.iid + 1
         self.id = self.id + 1
@@ -100,32 +100,38 @@ class Application(tk.Frame):
     def make_preordered(self):
         '''
         Making preordered view of tree
-
         '''
-        r = Node(self.list1[0])
-        for i in app.list1[1:]:
-            r = insert(r, i)
-        self.element_result_preorder.insert(0, preorder(r))
+        try:
+            r = Node(self.list1[0])
+            for i in app.list1[1:]:
+                r = insert(r, i)
+            self.element_result_preorder.insert(0, preorder(r))
+        except IndexError:
+            pass
 
     def make_inordered(self):
         '''
         Making inordered view of tree
-
         '''
-        r = Node(self.list1[0])
-        for i in app.list1[1:]:
-            r = insert(r, i)
-        self.element_result_inorder.insert(0, inorder(r))
+        try:
+            r = Node(self.list1[0])
+            for i in app.list1[1:]:
+                r = insert(r, i)
+            self.element_result_inorder.insert(0, inorder(r))
+        except IndexError:
+            pass
 
     def make_postordered(self):
         '''
         Making postordered view of tree
-
         '''
-        r = Node(self.list1[0])
-        for i in app.list1[1:]:
-            r = insert(r, i)
-        self.element_result_postorder.insert(0, postorder(r))
+        try:
+            r = Node(self.list1[0])
+            for i in app.list1[1:]:
+                r = insert(r, i)
+            self.element_result_postorder.insert(0, postorder(r))
+        except IndexError:
+            pass
 
 
 app = Application(tk.Tk())

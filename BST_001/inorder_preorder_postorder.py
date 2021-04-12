@@ -11,6 +11,23 @@ class Node:
         self.right = None
         self.val = key
 
+    def count_level(self):
+        if self.val == None:
+            return 0
+
+        if (self.left != None) and (self.right != None):
+
+            return max(self.left.count_level(), self.right.count_level()) + 1
+
+        elif (self.left != None) and (self.right == None):
+            return self.left.count_level() + 1
+
+        elif (self.left == None) and (self.right != None):
+            return self.right.count_level() + 1
+
+        elif (self.left == None) and (self.right == None):
+            return 1
+
 
 # A utility function to insert
 # a new node with the given key
@@ -31,73 +48,70 @@ def insert(root, key):
 
 # A utility function to do inorder tree traversal
 
-
 result1 = ''
-def inorder(root):
-    global result1
-    if root:
-        inorder(root.left)
-        result1 += str(root.val) + ' '
-        inorder(root.right)
 
+
+def preorder(root, child=False):
+    global result1
+    if not child:
+        result1 = ''
+    if root:
+        result1 += str(root.val) + ' '
+        preorder(root.left, child=True)
+        preorder(root.right, child=True)
     return result1
 
 
 result2 = ''
-def preorder(root):
+
+
+def inorder(root, child=False):
     global result2
+    if not child:
+        result2 = ''
     if root:
+        inorder(root.left, child=True)
         result2 += str(root.val) + ' '
-        preorder(root.left)
-        preorder(root.right)
+        inorder(root.right, child=True)
     return result2
 
 
 result3 = ''
-def postorder(root):
+
+
+def postorder(root, child=False):
     global result3
+    if not child:
+        result3 = ''
     if root:
-        postorder(root.left)
-        postorder(root.right)
+        postorder(root.left, child=True)
+        postorder(root.right, child=True)
         result3 += str(root.val) + ' '
     return result3
 
-
-# result4 = []
-# def binary(root):
-#     global result4
+# result1 = ''
+# def preorder(root, result2):
 #     if root:
-#         binary(root.left)
-#         result4.append(int(root.val))
-#         binary(root.right)
-#
-#     #     return result4
-#     for i in range(len(result4) - 1):
-#         if result4[i] < result4[i + 1]:
-#             continue
-#         else:
-#             return False
-#     return True
+#         result1 += str(root.val)
+#         result1 = preorder(root.left, result1)
+#         result1 = preorder(root.right, result1)
+#     return result1
 
 
-# r = Node(50)
-# r = insert(r, 25)
-# r = insert(r, 45)
-# r = insert(r, 121)
-# r = insert(r, 3)
-# r = insert(r, 856)
-# r = insert(r, 87)
-#
-# # # Print inoder traversal of the BST
-# z1 = inorder(r)
-# # print()
-# z2 = preorder(r)
-# # print()
-# z3 = postorder(r)
-#
-# z4 = binary(r)
-#
-# print(z1)
-# print(z2)
-# print(z3)
-# print(z4)
+# result2 = ''
+# def inorder(root, result1):
+#     if root:
+#         result2 = inorder(root.left, result2)
+#         result2 += str(root.val)
+#         result2 = inorder(root.right, result2)
+#     return result2
+
+
+# result3 = ''
+# def postorder(root, result3):
+#     if root:
+
+#         result3 = postorder(root.left, result3)
+#         result3 = postorder(root.right, result3)
+#         result3 += str(root.val)
+#     return result3

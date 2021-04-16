@@ -1,4 +1,4 @@
-from tkinter import *
+
 import tkinter as tk
 import tkinter.ttk as ttk
 from inorder_preorder_postorder import *
@@ -36,6 +36,8 @@ class Application(tk.Frame):
         self.element_result_height = tk.Entry(self.root, width=40)
         self.element_result_height.grid(row=5, column=0, sticky='w', padx=2)
 
+        '''Creating buttons
+        '''
         self.submit_button_insert = tk.Button(self.root,
                                               text="Insert",
                                               command=lambda: [self.insert_element()])
@@ -70,8 +72,7 @@ class Application(tk.Frame):
                                               text="Clear space",
                                               command=lambda: [self.refresh_treeview()])
         self.submit_button_height.grid(row=7, column=2, sticky='e', padx=2, pady=2)
-        # , self.clear_all_results()
-        # Set the treeview
+
         self.tree = ttk.Treeview(self.root, columns=('Elements'))
 
         # Set the heading (Attribute Names)
@@ -104,13 +105,15 @@ class Application(tk.Frame):
         self.id = self.id + 1
 
     def make_tree_from_treeview(self):
+        '''Makes binary tree from elements of TreeView
+        '''
         z = []
         for child in self.tree.get_children():
             z.append(self.tree.item(child)['values'])
         z = [i[0] for i in z]
         r = Node(z[0])
         for i in z[1:]:
-            r = insert(r, i)
+            r = myTree.insert(r, i)
         return r
 
     #         print(r)
@@ -151,6 +154,8 @@ class Application(tk.Frame):
             pass
 
     def count_elements(self):
+        '''Counting number of elements
+        '''
         try:
             self.element_result_count.delete(0, 'end')
             self.element_result_count.insert(0, len(self.tree.get_children()))
@@ -158,6 +163,8 @@ class Application(tk.Frame):
             pass
 
     def measure_level(self):
+        '''Measuring height of tree
+        '''
         try:
             r = self.make_tree_from_treeview()
             self.element_result_height.delete(0, 'end')

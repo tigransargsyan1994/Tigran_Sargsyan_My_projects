@@ -97,8 +97,7 @@ class Application(tk.Frame):
         '''
         Printing all the elements in entry in Treeview
         '''
-        # iid=self.iid,
-        # text="Item_" + str(self.id)
+
         try:
             self.tree.insert('', 'end',
                              values=(int(self.element_entry.get())))
@@ -120,8 +119,6 @@ class Application(tk.Frame):
             r = myTree.insert(r, i)
         return r
 
-    #         print(r)
-
     def make_preordered(self):
         '''
         Making preordered view of tree
@@ -131,7 +128,7 @@ class Application(tk.Frame):
             r = self.make_tree_from_treeview()
             self.element_result_preorder.delete(0, tk.END)
             self.element_result_preorder.insert(0, preorder(r))
-        #             raise RuntimeError(preorder(r))
+
         except IndexError:
             pass
 

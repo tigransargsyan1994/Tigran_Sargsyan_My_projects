@@ -1,4 +1,3 @@
-
 import tkinter as tk
 import tkinter.ttk as ttk
 from inorder_preorder_postorder import *
@@ -13,9 +12,9 @@ class Application(tk.Frame):
         # Configure the root object for the Application
         self.root.title("Application")
         self.root.grid_rowconfigure(0, weight=1)
-        self.root.grid_columnconfigure(0, weight=1)
+        self.root.grid_columnconfigure(1, weight=1)
         self.root.config(background="green")
-
+        self.root.geometry('370x720')
         # Define the different GUI widgets
 
         self.element_entry = tk.Entry(self.root, width=10)
@@ -75,13 +74,18 @@ class Application(tk.Frame):
 
         self.tree = ttk.Treeview(self.root, columns=('Elements'))
 
+        self.verscrlbar = ttk.Scrollbar(self.tree,
+                                        orient="vertical",
+                                        command=self.tree.yview)
+        self.verscrlbar.pack(side='right', fill='y', ipadx=1, ipady=230, padx=1, pady=1)
+
         # Set the heading (Attribute Names)
         self.tree.heading('#0', text='Item')
         self.tree.heading('#1', text='Elements')
 
         # Specify attributes of the columns (We want to stretch it!)
-        self.tree.column('#0', stretch=tk.YES)
-        self.tree.column('#1', stretch=tk.YES)
+        #         self.tree.column('#0', stretch=tk.YES)
+        #         self.tree.column('#1', stretch=tk.YES)
 
         self.tree.grid(row=8, columnspan=3, sticky='nsew')
         self.treeview = self.tree

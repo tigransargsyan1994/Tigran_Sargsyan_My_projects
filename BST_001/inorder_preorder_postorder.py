@@ -45,35 +45,35 @@ class AVL_Tree(object):
 
         # Step 2 - Update the height of the
         # ancestor node
-        root.height = 1 + max(self.getHeight(root.left),
-                              self.getHeight(root.right))
+        root.height = 1 + max(self.get_height(root.left),
+                              self.get_height(root.right))
 
         # Step 3 - Get the balance factor
-        balance = self.getBalance(root)
+        balance = self.get_balance(root)
 
         # Step 4 - If the node is unbalanced,
         # then try out the 4 cases
         # Case 1 - Left Left
         if balance > 1 and key < root.left.val:
-            return self.rightRotate(root)
+            return self.right_rotate(root)
 
         # Case 2 - Right Right
         if balance < -1 and key > root.right.val:
-            return self.leftRotate(root)
+            return self.left_rotate(root)
 
         # Case 3 - Left Right
         if balance > 1 and key > root.left.val:
-            root.left = self.leftRotate(root.left)
-            return self.rightRotate(root)
+            root.left = self.left_rotate(root.left)
+            return self.right_rotate(root)
 
         # Case 4 - Right Left
         if balance < -1 and key < root.right.val:
-            root.right = self.rightRotate(root.right)
-            return self.leftRotate(root)
+            root.right = self.right_rotate(root.right)
+            return self.left_rotate(root)
 
         return root
 
-    def leftRotate(self, z):
+    def left_rotate(self, z):
 
         y = z.right
         T2 = y.left
@@ -83,15 +83,15 @@ class AVL_Tree(object):
         z.right = T2
 
         # Update heights
-        z.height = 1 + max(self.getHeight(z.left),
-                           self.getHeight(z.right))
-        y.height = 1 + max(self.getHeight(y.left),
-                           self.getHeight(y.right))
+        z.height = 1 + max(self.get_height(z.left),
+                           self.get_height(z.right))
+        y.height = 1 + max(self.get_height(y.left),
+                           self.get_height(y.right))
 
         # Return the new root
         return y
 
-    def rightRotate(self, z):
+    def right_rotate(self, z):
 
         y = z.left
         T3 = y.right
@@ -101,25 +101,25 @@ class AVL_Tree(object):
         z.left = T3
 
         # Update heights
-        z.height = 1 + max(self.getHeight(z.left),
-                           self.getHeight(z.right))
-        y.height = 1 + max(self.getHeight(y.left),
-                           self.getHeight(y.right))
+        z.height = 1 + max(self.get_height(z.left),
+                           self.get_height(z.right))
+        y.height = 1 + max(self.get_height(y.left),
+                           self.get_height(y.right))
 
         # Return the new root
         return y
 
-    def getHeight(self, root):
+    def get_height(self, root):
         if not root:
             return 0
 
         return root.height
 
-    def getBalance(self, root):
+    def get_balance(self, root):
         if not root:
             return 0
 
-        return self.getHeight(root.left) - self.getHeight(root.right)
+        return self.get_height(root.left) - self.get_height(root.right)
 
 
 # Driver program to test above function
@@ -181,10 +181,10 @@ def postorder(root, child=False):
 #         /  \     \
 #        10  25    50"""
 
-# # Preorder Traversal
+# Preorder Traversal
 # print("Preorder traversal of the",
 #       "constructed AVL tree is")
-# myTree.preOrder(root)
+# myTree.preorder(root)
 # print()
 
 # This code is contributed by Ajitesh Pathak

@@ -15,8 +15,8 @@ class Application(tk.Frame):
         self.root.grid_columnconfigure(1, weight=1)
         self.root.config(background="green")
         self.root.geometry('370x720')
-        # Define the different GUI widgets
 
+        # Define the different GUI widgets
         self.element_entry = tk.Entry(self.root, width=10)
         self.element_entry.grid(row=0, column=0, sticky='w', padx=2)
 
@@ -83,10 +83,6 @@ class Application(tk.Frame):
         self.tree.heading('#0', text='Item')
         self.tree.heading('#1', text='Elements')
 
-        # Specify attributes of the columns (We want to stretch it!)
-        #         self.tree.column('#0', stretch=tk.YES)
-        #         self.tree.column('#1', stretch=tk.YES)
-
         self.tree.grid(row=8, columnspan=3, sticky='nsew')
         self.treeview = self.tree
 
@@ -97,15 +93,15 @@ class Application(tk.Frame):
         '''
         Printing all the elements in entry in Treeview
         '''
+        iid = self.iid,
 
         try:
-            self.tree.insert('', 'end',
+            self.tree.insert('', 'end', text="Item_" + str(self.id),
                              values=(int(self.element_entry.get())))
+            self.iid = self.iid + 1
+            self.id = self.id + 1
         except ValueError:
             pass
-
-        self.iid = self.iid + 1
-        self.id = self.id + 1
 
     def make_tree_from_treeview(self):
         '''Makes binary tree from elements of TreeView
@@ -181,6 +177,8 @@ class Application(tk.Frame):
         # clear the entries in the Treeview
         for x in self.tree.get_children():
             self.tree.delete(x)
+        self.iid = 0
+        self.id = 0
 
 
 app = Application(tk.Tk())

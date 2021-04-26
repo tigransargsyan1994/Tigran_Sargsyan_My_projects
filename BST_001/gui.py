@@ -1,6 +1,6 @@
 import tkinter as tk
 import tkinter.ttk as ttk
-from inorder_preorder_postorder import *
+from avl import *
 
 
 class Application(tk.Frame):
@@ -112,7 +112,7 @@ class Application(tk.Frame):
         z = [i[0] for i in z]
         r = Node(z[0])
         for i in z[1:]:
-            r = myTree.insert(r, i)
+            r = tree_instance.insert(r, i)
         return r
 
     def make_preordered(self):

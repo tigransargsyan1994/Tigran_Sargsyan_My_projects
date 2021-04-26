@@ -123,12 +123,10 @@ class AVL_Tree(object):
 
 
 # Driver program to test above function
-myTree = AVL_Tree()
-root = None
+tree_instance = AVL_Tree()
+
 
 result1 = ''
-
-
 def preorder(root, child=False):
     global result1
     if not child:
@@ -141,8 +139,6 @@ def preorder(root, child=False):
 
 
 result2 = ''
-
-
 def inorder(root, child=False):
     global result2
     if not child:
@@ -155,8 +151,6 @@ def inorder(root, child=False):
 
 
 result3 = ''
-
-
 def postorder(root, child=False):
     global result3
     if not child:
